@@ -1,4 +1,8 @@
-function currEnergy = computeEnergy(lineDom, lineLaser, Nx)
+function currEnergy = computeEnergy(lineDom, lineLaser)
+%input: domain, laser
+%Computes the current energy of a laser-affected domain
+
+Nx = length(lineDom);
 
 topL = sum((lineDom~=circshift(lineDom, -Nx-1)).*lineLaser);
 top = sum((lineDom~=circshift(lineDom, -Nx)).*lineLaser);
@@ -9,6 +13,6 @@ bottomL = sum((lineDom~=circshift(lineDom, Nx-1)).*lineLaser);
 bottom = sum((lineDom~=circshift(lineDom, Nx)).*lineLaser);
 bottomR = sum((lineDom~=circshift(lineDom, Nx+1)).*lineLaser);
 
-currEnergy = 0.5*(topL+top+topR+L+R+bottomL+bottom+bottomR);
+currEnergy = topL+top+topR+L+R+bottomL+bottom+bottomR;
 
 end
